@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>My Orders</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+    body{
+        background:#f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    h2{
+        text-align:center;
+    }
+
+    .order-card {
+        width:80%;
+        margin:20px auto;
+        padding:20px;
+        border-radius:10px;
+        box-shadow:0 2px 8px rgba(0,0,0,0.1);
+        background:#fff;
+    }
+
+    .status-active{
+        color:green;
+        font-weight:bold;
+    }
+
+    .status-pending{
+        color:orange;
+        font-weight:bold;
+    }
+
+    .status-delivered{
+        color:blue;
+        font-weight:bold;
+    }
+
+    table{
+        width:100%;
+        margin-top:15px;
+        border-collapse:collapse;
+    }
+
+    th,td{
+        padding:10px;
+        border:1px solid #ddd;
+        text-align:center;
+    }
+
+    th{
+        background:#f0f0f0;
+    }
+
+    img{
+        border-radius:8px;
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+<h2>My Orders</h2>
+
+{% for order in all_orders %}
+
+<div class="order-card">
+
+
+<h3>Order ID: {{ order.order_id }}</h3>
+
+<p>Date: {{ order.date }}</p>
+
+<!-- ORDER STATUS -->
+
+<p>
+    Status :
+
+    {% if order.status == "Active" %}
+        <span class="status-active">{{ order.status }}</span>
+
+    {% elif order.status == "Pending" %}
+        <span class="status-pending">{{ order.status }}</span>
+
+    {% elif order.status == "Delivered" %}
+        <span class="status-delivered">{{ order.status }}</span>
+
+    {% else %}
+        {{ order.status }}
+
+    {% endif %}
+</p>
+
+
+
+<!-- DELIVERY PARTNER -->
+
+<!-- OTP SECTION -->
+
+{% if order.partner_id %}
+
+<div style="
+background:#fff5f5;
+padding:15px;
+border-radius:10px;
+margin:15px 0;
+text-align:center;
+">
+
+    <h3 style="color:#ff4d4d;">
+        Delivery OTP
+    </h3>
+
+    <h1 style="
+    color:red;
+    font-size:40px;
+    letter-spacing:5px;
+    ">
+        {{ order.otp }}
+    </h1>
+
+    <p>
+        Share this OTP with delivery partner
+        at delivery time.
+    </p>
+
+</div>
+
+{% else %}
+
+<p style="
+color:#ff4d4d;
+font-weight:bold;
+">
+
+Waiting For Delivery Partner 🚴
+
+</p>
+
+{% endif %}
+
+<p><strong>Total : ₹{{ order.total }}</strong></p>
+
+<!-- ORDER ITEMS -->
+
+{% if order["items"] %}
+
+<table>
+
+    <tr>
+        <th>Image</th>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+    </tr>
+
+    {% for item in order["items"] %}
+
+    {% if order.partner is none and order.status != "Delivered" %}
+<a href="{{ url_for('cancel_order', order_id=order.order_id) }}">
+<button style="background:red;color:white;padding:8px;border:none;border-radius:5px;">
+Cancel Order
+</button>
+</a>
+{% endif %}
+
+    <tr>
+
+        <td>
+
+            {% if item|length > 0 and item[4] %}
+                <img src="{{ url_for('static', filename='images/' + item[4]) }}" width="70">
+
+            {% else %}
+                No Image
+
+            {% endif %}
+
+        </td>
+
+        <td>{{ item[0] }}</td>
+
+        <td>₹{{ item[1] }}</td>
+
+        <td>{{ item[2] }}</td>
+
+        <td>₹{{ item[3] }}</td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+
+{% else %}
+
+    <p>No items found for this order.</p>
+
+{% endif %}
+
+{% if order.status == "Active" %}
+<a href="/track_order/{{ order.order_id }}">
+<button style="background:blue;color:white;padding:8px;border:none;border-radius:5px;">
+Track Order
+</button>
+</a>
+{% endif %}
+
+
+</div>
+
+{% else %}
+
+<p style="text-align:center;">No Orders Yet</p>
+
+{% endfor %}
+
+</body>
+</html>

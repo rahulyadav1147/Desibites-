@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Subscriptions</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    padding:30px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin:20px auto;
+    width:80%;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+    color:#ff4d4d;
+}
+
+.active{
+    color:green;
+    font-weight:bold;
+}
+
+</style>
+</head>
+<body>
+
+<h2>My Subscription Plans</h2>
+
+{% for sub in subscriptions %}
+
+<div class="card">
+
+<h3>{{ sub[2] }}</h3>
+
+<p><strong>Price:</strong> ₹{{ sub[3] }}</p>
+
+<p><strong>Plan:</strong> {{ sub[4] }}</p>
+
+<p><strong>Address:</strong> {{ sub[5] }}</p>
+
+<p><strong>Start:</strong> {{ sub[6] }}</p>
+
+<p><strong>End:</strong> {{ sub[7] }}</p>
+
+<p>
+<strong>Status:</strong>
+<span class="active">{{ sub[8] }}</span>
+</p>
+
+</div>
+
+{% endfor %}
+
+</body>
+</html>

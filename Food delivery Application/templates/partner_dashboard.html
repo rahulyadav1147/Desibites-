@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Delivery Dashboard</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#fff5f5;
+    margin:0;
+    padding:0;
+}
+
+/* HEADER */
+
+.header{
+    background:#ff4d4d;
+    color:white;
+    padding:18px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header h2{
+    margin:0;
+}
+
+/* LOGOUT BUTTON */
+
+.logout-btn{
+    background:white;
+    color:#ff4d4d;
+    padding:10px 16px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.logout-btn:hover{
+    background:#ffe5e5;
+}
+
+/* CONTAINER */
+
+.container{
+    padding:40px;
+}
+
+/* Table Styling */
+
+table{
+    width:95%;
+    margin:auto;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 6px 20px rgba(0,0,0,0.1);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+th{
+    background:#ff4d4d;
+    color:white;
+    padding:12px;
+    font-size:16px;
+}
+
+td{
+    text-align:center;
+    padding:12px;
+    border-bottom:1px solid #eee;
+}
+
+tr:hover{
+    background:#fff0f0;
+}
+
+/* Button */
+
+button{
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+button:hover{
+    background:#e63e3e;
+}
+
+.address{
+    text-align:left;
+    line-height:1.6;
+}
+
+/* OTP Input */
+
+input{
+    padding:8px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    margin-bottom:8px;
+    width:120px;
+}
+
+/* STATUS */
+
+.pending{
+    color:orange;
+    font-weight:bold;
+}
+
+.delivered{
+    color:green;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<h2>
+Delivery Partner Dashboard
+</h2>
+
+<a href="{{ url_for('partner_logout') }}"
+   class="logout-btn">
+
+Logout
+
+</a>
+
+</div>
+
+<!-- CONTAINER -->
+
+<div class="container">
+
+<table>
+
+<tr>
+
+<th>Order ID</th>
+<th>User</th>
+<th>Total</th>
+<th>Status</th>
+<th>Delivery Address</th>
+<th>OTP Verification</th>
+
+</tr>
+
+{% for order in orders %}
+
+<tr>
+
+<td>{{ order[0] }}</td>
+
+<td>{{ order[1] }}</td>
+
+<td>₹{{ order[2] }}</td>
+
+<!-- STATUS -->
+
+<td>
+
+{% if order[3] == "Delivered" %}
+
+<span class="delivered">
+Delivered ✅
+</span>
+
+{% else %}
+
+<span class="pending">
+{{ order[3] }}
+</span>
+
+{% endif %}
+
+</td>
+
+<!-- ADDRESS -->
+
+<td class="address">
+
+<b>Name:</b> {{ order[4] }} <br><br>
+
+<b>Mobile:</b> {{ order[5] }} <br><br>
+
+<b>Address:</b> {{ order[6] }} <br><br>
+
+<b>City:</b> {{ order[7] }} <br><br>
+
+<b>Pincode:</b> {{ order[8] }} <br><br>
+
+<b>Landmark:</b> {{ order[9] }}
+
+</td>
+
+<!-- OTP ACTION -->
+
+<td>
+
+{% if order[3] != "Delivered" %}
+
+<form action="/verify_delivery/{{ order[0] }}"
+      method="POST">
+
+    <input type="text"
+           name="otp"
+           placeholder="Enter OTP"
+           required>
+
+    <br>
+
+    <button type="submit">
+        Verify & Deliver
+    </button>
+
+</form>
+
+{% else %}
+
+Completed ✅
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

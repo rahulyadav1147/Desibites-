@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>Track Order</title>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrryhXqSGaJe3WtwP17v1Xh_y3qRIePQQ"></script>
+
+</head>
+
+<body>
+
+<h2>Track Your Delivery</h2>
+
+<div id="map" style="height:450px;"></div>
+
+<h3 id="distance"></h3>
+<h3 id="time"></h3>
+
+<script>
+
+function initMap(){
+
+let userLocation = {lat:22.3039, lng:70.8022};
+let partnerLocation = {lat:22.3100, lng:70.8100};
+
+var map = new google.maps.Map(
+document.getElementById("map"),
+{
+zoom:13,
+center:userLocation
+}
+);
+
+// User Marker
+new google.maps.Marker({
+position:userLocation,
+map:map,
+label:"U",
+title:"Customer Location"
+});
+
+// Delivery Marker
+new google.maps.Marker({
+position:partnerLocation,
+map:map,
+label:"D",
+title:"Delivery Location"
+});
+
+var directionsService = new google.maps.DirectionsService();
+
+var directionsRenderer = new google.maps.DirectionsRenderer({
+polylineOptions:{
+strokeColor:"blue",
+strokeWeight:5
+}
+});
+
+directionsRenderer.setMap(map);
+
+var request = {
+origin: partnerLocation,
+destination: userLocation,
+travelMode: "DRIVING"
+};
+
+directionsService.route(request,function(result,status){
+
+if(status === "OK"){
+
+directionsRenderer.setDirections(result);
+
+// Distance and Time calculation
+var leg = result.routes[0].legs[0];
+
+var distanceKm = leg.distance.value / 1000;   // meters → km
+
+var estimatedMinutes = Math.round(distanceKm * 6);
+
+document.getElementById("distance").innerHTML =
+"Distance : " + distanceKm.toFixed(2) + " km";
+
+document.getElementById("time").innerHTML =
+"Estimated Time : " + estimatedMinutes + " minutes";
+}
+
+});
+
+}
+
+initMap();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Food Chatbot</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    padding:40px;
+}
+
+.container{
+    width:550px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#ff4d4d;
+    margin-bottom:25px;
+}
+
+.chat-box{
+    background:#fff5f5;
+    padding:20px;
+    border-radius:12px;
+    min-height:150px;
+    margin-bottom:20px;
+    line-height:1.8;
+    color:#333;
+    font-size:16px;
+}
+
+select{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    margin-bottom:15px;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#e63e3e;
+}
+
+.note{
+    margin-top:20px;
+    color:#666;
+    text-align:center;
+    font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+🤖 AI Food Delivery Chatbot
+</h1>
+
+<!-- CHAT RESPONSE -->
+
+<div class="chat-box">
+
+{% if reply %}
+
+{{ reply }}
+
+{% else %}
+
+Welcome 👋
+
+Choose a query from menu below.
+
+{% endif %}
+
+</div>
+
+<!-- CHATBOT FORM -->
+
+<form method="POST">
+
+<select name="message" required>
+
+<option value="">
+Choose Query
+</option>
+
+<!-- ORDER -->
+
+<option value="where is my order">
+📦 Where is my order
+</option>
+
+<option value="track order">
+🚴 Track my order
+</option>
+
+<option value="cancel order">
+❌ Cancel my order
+</option>
+
+<option value="delivery time">
+⏱ Delivery time
+</option>
+
+<option value="otp">
+🔐 Show delivery OTP
+</option>
+
+<option value="delivery partner">
+🚴 Delivery partner details
+</option>
+
+<!-- PAYMENT -->
+
+<option value="payment">
+💳 Payment issue
+</option>
+
+<option value="refund">
+💰 Refund status
+</option>
+
+<!-- SUBSCRIPTION -->
+
+<option value="subscription">
+🍴 My subscription
+</option>
+
+<!-- FOOD -->
+
+<option value="pizza">
+🍕 Recommend Pizza
+</option>
+
+<option value="burger">
+🍔 Recommend Burger
+</option>
+
+<option value="healthy">
+🥗 Healthy food
+</option>
+
+<option value="spicy">
+🌶 Spicy food
+</option>
+
+<option value="south indian">
+🥘 South Indian food
+</option>
+
+</select>
+
+<button type="submit">
+Ask AI Chatbot
+</button>
+
+</form>
+
+<div class="note">
+
+AI assistant helps with:
+Orders • Payments • Delivery • Food Recommendation • Subscription
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.header {
+    background: #ff4d4d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* NAVBAR (HORIZONTAL) */
+.header nav {
+    display: flex;
+    align-items: center;
+}
+
+/* NAV LINKS */
+.header nav a,
+.dropbtn {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.header nav a:hover,
+.dropbtn:hover {
+    text-decoration: underline;
+}
+
+/* ============================= */
+/* RESTAURANTS DROPDOWN (ONLY)  */
+/* ============================= */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* DROPDOWN LIST */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ff4d4d;
+    min-width: 200px;
+    max-height: 180px;          /* VERTICAL SCROLL */
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1001;
+}
+
+/* RESTAURANT LINKS */
+.dropdown-content a {
+    color: black;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.dropdown-content a:hover {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+/* SHOW DROPDOWN ON HOVER */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* OPTIONAL SCROLLBAR STYLE */
+.dropdown-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+
+/* HERO */
+.hero {
+    background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836') center/cover;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 40px;
+}
+
+.search-box {
+    margin-top: 20px;
+}
+
+.search-box input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-box button {
+    padding: 10px 20px;
+    background: #ff4d4d;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* FEATURES */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    background: #f9f9f9;
+}
+
+.feature {
+    width: 22%;
+    text-align: center;
+}
+
+/* CATEGORIES */
+.categories {
+    padding: 40px;
+    text-align: center;
+}
+
+.category-list span {
+    display: inline-block;
+    background: #ff4d4d;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+/* RESTAURANTS */
+.restaurants {
+    padding: 40px;
+    background: #f9f9f9;
+}
+
+.restaurant-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    width: 22%;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* STEPS */
+.steps {
+    padding: 40px;
+    text-align: center;
+}
+
+.step-list {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* CTA */
+.cta {
+    background: #ff4d4d;
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+.cta button {
+    padding: 12px 30px;
+    border: none;
+    background: white;
+    color: #ff4d4d;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* FOOTER */
+.footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .features,
+    .restaurant-list,
+    .step-list {
+        flex-direction: column;
+    }
+
+    .feature,
+    .card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* BETTER MOBILE NAV SCROLL */
+    .header nav {
+        max-width: 100%;
+    }
+}

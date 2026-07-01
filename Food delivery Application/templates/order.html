@@ -1,0 +1,49 @@
+<h2>Your Cart</h2>
+
+{% if cart_items %}
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Action</th>
+        <th>Subtotal</th>
+    </tr>
+
+    {% for item in cart_items %}
+    <tr>
+        <td>{{ item[2] }}</td>
+        <td>₹{{ item[3] }}</td>
+
+        <td>{{ item[4] }}</td>
+
+        <td>
+            <!-- Decrease Button -->
+            <form action="{{ url_for('update_cart') }}" method="POST" style="display:inline;">
+                <input type="hidden" name="cart_id" value="{{ item[0] }}">
+                <input type="hidden" name="action" value="decrease">
+                <button type="submit">➖</button>
+            </form>
+
+            <!-- Increase Button -->
+            <form action="{{ url_for('update_cart') }}" method="POST" style="display:inline;">
+                <input type="hidden" name="cart_id" value="{{ item[0] }}">
+                <input type="hidden" name="action" value="increase">
+                <button type="submit">➕</button>
+            </form>
+        </td>
+
+        <td>₹{{ item[5] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Total: ₹{{ total }}</h3>
+
+<a href="{{ url_for('address') }}">
+    <button>Proceed To Address</button>
+</a>
+
+{% else %}
+<p>Your cart is empty</p>
+{% endif %}

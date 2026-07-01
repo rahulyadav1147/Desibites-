@@ -1,0 +1,42 @@
+<h2>Order Confirmed 🎉</h2>
+
+<p>
+Order ID:
+<strong>#{{ order[0] }}</strong>
+</p>
+
+<p>
+Total:
+₹{{ order[1] }}
+</p>
+
+<p>
+Status:
+{{ order[2] }}
+</p>
+
+{% if order[3] %}
+
+<h3>Your Delivery OTP</h3>
+
+<h1 style="color:red;">
+    {{ order[4] }}
+</h1>
+
+<p>
+Share OTP with delivery partner.
+</p>
+
+{% else %}
+
+<h3>
+Waiting For Delivery Partner 🚴
+</h3>
+
+{% endif %}
+
+<a href="/payment">
+    <button>
+        Proceed To Payment
+    </button>
+</a>

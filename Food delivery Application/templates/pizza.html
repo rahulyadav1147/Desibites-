@@ -1,0 +1,408 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Pizza Palace - DesiBites</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/stylee.css') }}"
+    />
+
+    <style>
+      .qty-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .qty-box button {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .qty-box input {
+        width: 40px;
+        text-align: center;
+      }
+    </style>
+
+    <script>
+      function increase(id) {
+        let qty = document.getElementById(id);
+        qty.value = parseInt(qty.value) + 1;
+      }
+
+      function decrease(id) {
+        let qty = document.getElementById(id);
+        if (qty.value > 1) {
+          qty.value = parseInt(qty.value) - 1;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="top-bar">
+        <div class="logo">🍔 DesiBites</div>
+
+        <div class="header-icons">
+          <a href="{{ url_for('order') }}"> 🛒 Cart ({{ cart_count }}) </a>
+          <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <h2>Restaurant Menu</h2>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/pizza1.jpeg') }}" />
+        <h3>Burger</h3>
+        <p>Classic tomato & cheese</p>
+        <h4>₹50</h4>
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Burger " />
+          <input type="hidden" name="price" value="50" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty1')">-</button>
+            <input type="text" id="qty1" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty1')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/samosa.jpg') }}" />
+        <h3>Samosa</h3>
+        <p>Crispy and delicious</p>
+        <h4>₹20</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Samosa" />
+          <input type="hidden" name="price" value="20" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty2')">-</button>
+            <input type="text" id="qty2" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty2')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/idli sambar.jpg') }}" />
+        <h3>Idli Sambar</h3>
+        <p>Dip the Idli, Feel the Magic</p>
+        <h4>₹60</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Idli Sambar" />
+          <input type="hidden" name="price" value="60" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty3')">-</button>
+            <input type="text" id="qty3" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty3')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/party.jpg') }}" />
+        <h3>Desi Special</h3>
+        <p>One plate, countless flavors.</p>
+        <h4>₹149</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Desi Special" />
+          <input type="hidden" name="price" value="149" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty4')">-</button>
+            <input type="text" id="qty4" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty4')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/pp roti.jpg') }}" />
+        <h3>Palak Paneer Roti</h3>
+        <p>Testy  and slices</p>
+        <h4>₹120</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Palak Paneer Roti" />
+          <input type="hidden" name="price" value="120" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty5')">-</button>
+            <input type="text" id="qty5" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty5')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/Mag.piza.jpg') }}" />
+        <h3>Margherita Pizza</h3>
+        <p>Classic tomato & cheese</p>
+        <h4>₹89</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Margherita Pizza" />
+          <input type="hidden" name="price" value="89" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty6')">-</button>
+            <input type="text" id="qty6" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty6')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+
+      <div class="product-card">
+        <img
+          src="{{ url_for('static', filename='images/pepronipizza.jpg') }}"
+        />
+        <h3>Pepperoni Pizza</h3>
+        <p>Spicy pepperoni slices</p>
+        <h4>₹339</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Margherita Pizza" />
+          <input type="hidden" name="price" value="89" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty7')">-</button>
+            <input type="text" id="qty7" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty7')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/puri sabji.jpg') }}" />
+        <h3>Puri Sabji</h3>
+        <p>Crispy Puri, Flavorful Sabji!</p>
+        <h4>₹89</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Puri Sabji" />
+          <input type="hidden" name="price" value="89" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty8')">-</button>
+            <input type="text" id="qty8" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty8')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/butterChicken.png') }}" />
+        <h3>Butter Chicken</h3>
+        <p>Rich and creamy tomato-based curry</p>
+        <h4>₹119</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Butter Chicken" />
+          <input type="hidden" name="price" value="119" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty9')">-</button>
+            <input type="text" id="qty9" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty9')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/Cheese_Burger.png') }}" />
+        <h3>Cheese Burger</h3>
+        <p>Delicious cheeseburger with fresh ingredients!</p>
+        <h4>₹49</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Cheese Burger" />
+          <input type="hidden" name="price" value="49" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty10')">-</button>
+            <input type="text" id="qty10" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty10')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/ChickenNuggets.png') }}" />
+        <h3>Chicken Nuggets</h3>
+        <p>Crunchy chicken nuggets with a golden coating!</p>
+        <h4>₹129</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Chicken Nuggets" />
+          <input type="hidden" name="price" value="129" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty11')">-</button>
+            <input type="text" id="qty11" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty11')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/dalMakhni.png') }}" />
+        <h3>Veg Biryani</h3>
+        <p>Flavorful and aromatic vegetable biryani!</p>
+        <h4>₹109</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Veg Biryani" />
+          <input type="hidden" name="price" value="109" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty12')">-</button>
+            <input type="text" id="qty12" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty12')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/French_Fries.png') }}" />
+        <h3>French Fries</h3>
+        <p>Crispy and golden brown french fries!</p>
+        <h4>₹69</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="French Fries" />
+          <input type="hidden" name="price" value="69" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty13')">-</button>
+            <input type="text" id="qty13" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty13')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/Lasagna.png') }}" />
+        <h3>Lasagna</h3>
+        <p>Delicious layers of pasta with rich sauce!</p>
+        <h4>₹149</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Lasagna" />
+          <input type="hidden" name="price" value="149" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty14')">-</button>
+            <input type="text" id="qty14" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty14')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/Red Sauce Pasta.png') }}" />
+        <h3>Red Sauce Pasta</h3>
+        <p>Delicious pasta with rich red sauce!</p>
+        <h4>₹35</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Red Sauce Pasta" />
+          <input type="hidden" name="price" value="35" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty15')">-</button>
+            <input type="text" id="qty15" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty15')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/roll.png') }}" />
+        <h3>Roll</h3>
+        <p>Delicious and crispy roll!</p>
+        <h4>₹50</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Roll" />
+          <input type="hidden" name="price" value="50" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty16')">-</button>
+            <input type="text" id="qty16" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty16')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/Sandwich.png') }}" />
+        <h3>Sandwich</h3>
+        <p>Delicious and filling sandwich!</p>
+        <h4>₹69</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="Sandwich" />
+          <input type="hidden" name="price" value="69" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty17')">-</button>
+            <input type="text" id="qty17" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty17')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/puri sabji.jpg') }}" />
+        <h3>chhole Bhature</h3>
+        <p>Crispy Bhature, Flavorful Sabji!</p>
+        <h4>₹89</h4>
+
+        <form method="POST" action="{{ url_for('add_to_cart') }}">
+          <input type="hidden" name="item_name" value="chhole Bhature" />
+          <input type="hidden" name="price" value="89" />
+
+          <div class="qty-box">
+            <button type="button" onclick="decrease('qty18')">-</button>
+            <input type="text" id="qty18" name="quantity" value="0" />
+            <button type="button" onclick="increase('qty18')">+</button>
+          </div>
+
+          <button type="submit">Add</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

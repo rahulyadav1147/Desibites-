@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Food Recommendation</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    padding:40px;
+}
+
+.container{
+    width:600px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    color:#ff4d4d;
+    margin-bottom:20px;
+}
+
+.food-box{
+    background:#fff5f5;
+    padding:15px;
+    margin:15px 0;
+    border-radius:10px;
+    font-size:20px;
+}
+
+button{
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#e63e3e;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+🤖 AI Food Recommendation
+</h1>
+
+<p>
+Recommended food based on current time
+</p>
+
+{% for food in recommendation %}
+
+<div class="food-box">
+
+🍴 {{ food }}
+
+</div>
+
+{% endfor %}
+
+<br>
+
+<a href="{{ url_for('home') }}">
+
+<button>
+Back To Home
+</button>
+
+</a>
+
+</div>
+
+</body>
+</html>

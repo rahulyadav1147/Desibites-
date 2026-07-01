@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Order Confirmed</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:white;
+    padding:40px;
+    width:500px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 6px 20px rgba(0,0,0,0.1);
+}
+
+h2{
+    color:#28a745;
+    margin-bottom:20px;
+}
+
+.order-info{
+    margin:15px 0;
+    font-size:18px;
+}
+
+.otp-box{
+    background:#fff5f5;
+    padding:20px;
+    border-radius:12px;
+    margin-top:25px;
+}
+
+.otp{
+    font-size:42px;
+    color:red;
+    font-weight:bold;
+    letter-spacing:5px;
+    margin:15px 0;
+}
+
+.note{
+    color:#555;
+    line-height:1.6;
+}
+
+.waiting{
+    color:#ff4d4d;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.buttons{
+    margin-top:30px;
+}
+
+button{
+    background:#ff4d4d;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    margin:10px;
+    font-size:16px;
+}
+
+button:hover{
+    background:#e63e3e;
+}
+
+.flow{
+    margin-top:25px;
+    color:#666;
+    font-size:14px;
+    line-height:1.8;
+}
+
+.active{
+    color:#ff4d4d;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Order Confirmed 🎉</h2>
+
+    <div class="order-info">
+
+        <p>
+            Your Order ID:
+            <strong>#{{ order_id }}</strong>
+        </p>
+
+        <p>
+            Total Paid:
+            <strong>₹{{ total }}</strong>
+        </p>
+
+        <p>
+            Status:
+            <strong>Pending</strong>
+        </p>
+
+    </div>
+
+    <!-- OTP SECTION -->
+
+    {% if partner and partner[0] %}
+
+    <div class="otp-box">
+
+        <h3>Your Delivery OTP</h3>
+
+        <div class="otp">
+            {{ otp }}
+        </div>
+
+        <p class="note">
+            Share this OTP with the delivery partner
+            at delivery time for secure verification.
+        </p>
+
+    </div>
+
+    {% else %}
+
+    <div class="otp-box">
+
+        <div class="waiting">
+            Waiting For Delivery Partner 🚴
+        </div>
+
+        <p class="note">
+            OTP will appear after delivery partner
+            is assigned to your order.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+    <!-- BUTTONS -->
+
+    <div class="buttons">
+
+        <a href="/payment">
+            <button>
+                Proceed To Payment
+            </button>
+        </a>
+
+        <a href="{{ url_for('home') }}">
+            <button>
+                Go Home
+            </button>
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>
